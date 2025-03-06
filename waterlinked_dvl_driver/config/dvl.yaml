@@ -1,3 +1,4 @@
+# IMPORTANT NOTE: for configuration issues, also update src/waterlinked_dvl_driver_parameters.yaml 
 waterlinked_dvl_driver_node:
   ros__parameters:
     # Descriptions for all DVL configurations can be found on the Water Linked
