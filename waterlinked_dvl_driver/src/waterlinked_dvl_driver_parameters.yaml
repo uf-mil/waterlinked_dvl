@@ -1,7 +1,7 @@
 waterlinked_dvl_driver:
   ip_address:
     type: string
-    default_value: "192.168.37.95"
+    default_value: "192.168.194.95"
     description: "The IP address of the DVL."
     read_only: true
 
@@ -19,7 +19,7 @@ waterlinked_dvl_driver:
 
   frame_id:
     type: string
-    default_value: "dvl_link"
+    default_value: "dvl_sensor_link"
     description: "The frame ID of the DVL."
     read_only: true
 

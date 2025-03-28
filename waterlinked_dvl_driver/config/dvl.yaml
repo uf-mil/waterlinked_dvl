@@ -5,7 +5,7 @@ waterlinked_dvl_driver_node:
     # Documentation: https://waterlinked.github.io/dvl/dvl-protocol/
 
     # Default IP address for the DVL-A50 and DVL-125
-    ip_address: "192.168.37.95"
+    ip_address: "192.168.194.95"
 
     # Default port for the DVL-A50 and DVL-125
     port: 16171
@@ -19,7 +19,7 @@ waterlinked_dvl_driver_node:
     # - y: Right
     # - z: Down
     # This can be rotated using the mounting_rotation_offset parameter.
-    frame_id: "dvl_link"
+    frame_id: "dvl_sensor_link"
 
     speed_of_sound: 1481 # m/s
 

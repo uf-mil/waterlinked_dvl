@@ -24,7 +24,7 @@
 
 #include "geometry_msgs/msg/pose_with_covariance_stamped.hpp"
 #include "libwaterlinked/client.hpp"
-#include "marine_acoustic_msgs/msg/dvl.hpp"
+//#include "marine_acoustic_msgs/msg/dvl.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 #include "rclcpp_components/register_node_macro.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
@@ -55,11 +55,11 @@ private:
   waterlinked_dvl_driver::Params params_;
 
   // Declare the DVL and dead reckoning messages to avoid re-initializing them every time they are published
-  marine_acoustic_msgs::msg::Dvl dvl_msg_;
+  //marine_acoustic_msgs::msg::Dvl dvl_msg_;
   geometry_msgs::msg::PoseWithCovarianceStamped dead_reckoning_msg_;
   nav_msgs::msg::Odometry odom_msg_;
 
-  std::shared_ptr<rclcpp::Publisher<marine_acoustic_msgs::msg::Dvl>> dvl_pub_;
+  //std::shared_ptr<rclcpp::Publisher<marine_acoustic_msgs::msg::Dvl>> dvl_pub_;
   std::shared_ptr<rclcpp::Publisher<geometry_msgs::msg::PoseWithCovarianceStamped>> dead_reckoning_pub_;
   std::shared_ptr<rclcpp::Publisher<nav_msgs::msg::Odometry>> odom_pub_;
 

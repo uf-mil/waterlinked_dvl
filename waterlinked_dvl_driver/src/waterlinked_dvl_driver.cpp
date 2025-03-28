@@ -95,12 +95,12 @@ auto WaterLinkedDvlDriver::on_configure(const rclcpp_lifecycle::State & /*previo
   }
 
   // Pre-populate the sensor state messages with known, static values
-  dvl_msg_.header.frame_id = params_.frame_id;
+  //dvl_msg_.header.frame_id = params_.frame_id;
   dead_reckoning_msg_.header.frame_id = params_.frame_id;
   odom_msg_.header.frame_id = params_.frame_id;
 
-  dvl_msg_.velocity_mode = marine_acoustic_msgs::msg::Dvl::DVL_MODE_BOTTOM;
-  dvl_msg_.dvl_type = marine_acoustic_msgs::msg::Dvl::DVL_TYPE_PISTON;  // 4-beam convex Janus array
+  //dvl_msg_.velocity_mode = marine_acoustic_msgs::msg::Dvl::DVL_MODE_BOTTOM;
+  //dvl_msg_.dvl_type = marine_acoustic_msgs::msg::Dvl::DVL_TYPE_PISTON;  // 4-beam convex Janus array
 
   // The following has been retrieved from:
   // https://github.com/ndahn/dvl_a50/blob/1e6a5304235facf53ecf82043fb5ba4c8569016b/src/dvl_a50_ros2.cpp#L45
@@ -108,57 +108,57 @@ auto WaterLinkedDvlDriver::on_configure(const rclcpp_lifecycle::State & /*previo
   // Each beam points 22.5° away from the center, LED pointing forward.
   // Transducers are rotated 45° around Z.
   // Beam 1 (+135° from X)
-  dvl_msg_.beam_unit_vec[0].x = -0.6532814824381883;
-  dvl_msg_.beam_unit_vec[0].y = 0.6532814824381883;
-  dvl_msg_.beam_unit_vec[0].z = 0.38268343236508984;
+  //dvl_msg_.beam_unit_vec[0].x = -0.6532814824381883;
+  //dvl_msg_.beam_unit_vec[0].y = 0.6532814824381883;
+  //dvl_msg_.beam_unit_vec[0].z = 0.38268343236508984;
 
-  // Beam 2 (-135° from X)
-  dvl_msg_.beam_unit_vec[1].x = -0.6532814824381883;
-  dvl_msg_.beam_unit_vec[1].y = -0.6532814824381883;
-  dvl_msg_.beam_unit_vec[1].z = 0.38268343236508984;
+  //// Beam 2 (-135° from X)
+  //dvl_msg_.beam_unit_vec[1].x = -0.6532814824381883;
+  //dvl_msg_.beam_unit_vec[1].y = -0.6532814824381883;
+  //dvl_msg_.beam_unit_vec[1].z = 0.38268343236508984;
 
-  // Beam 3 (-45° from X)
-  dvl_msg_.beam_unit_vec[2].x = 0.6532814824381883;
-  dvl_msg_.beam_unit_vec[2].y = -0.6532814824381883;
-  dvl_msg_.beam_unit_vec[2].z = 0.38268343236508984;
+  //// Beam 3 (-45° from X)
+  //dvl_msg_.beam_unit_vec[2].x = 0.6532814824381883;
+  //dvl_msg_.beam_unit_vec[2].y = -0.6532814824381883;
+  //dvl_msg_.beam_unit_vec[2].z = 0.38268343236508984;
 
-  // Beam 4 (+45° from X)
-  dvl_msg_.beam_unit_vec[3].x = 0.6532814824381883;
-  dvl_msg_.beam_unit_vec[3].y = 0.6532814824381883;
-  dvl_msg_.beam_unit_vec[3].z = 0.38268343236508984;
+  //// Beam 4 (+45° from X)
+  //dvl_msg_.beam_unit_vec[3].x = 0.6532814824381883;
+  //dvl_msg_.beam_unit_vec[3].y = 0.6532814824381883;
+  //dvl_msg_.beam_unit_vec[3].z = 0.38268343236508984;
 
-  dvl_pub_ = create_publisher<marine_acoustic_msgs::msg::Dvl>("~/velocity_report", rclcpp::SystemDefaultsQoS());
+  //dvl_pub_ = create_publisher<marine_acoustic_msgs::msg::Dvl>("~/velocity_report", rclcpp::SystemDefaultsQoS());
   odom_pub_ = create_publisher<nav_msgs::msg::Odometry>("~/odom", rclcpp::SystemDefaultsQoS());
   dead_reckoning_pub_ = create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>(
     "~/dead_reckoning_report", rclcpp::SystemDefaultsQoS());
 
   client_->register_callback([this](const VelocityReport & report) {
     const auto t = std::chrono::time_point_cast<std::chrono::nanoseconds>(report.time_of_validity);
-    dvl_msg_.header.stamp = rclcpp::Time(t.time_since_epoch().count());
-    dvl_msg_.altitude = report.altitude;
-    dvl_msg_.velocity.x = report.vx;
-    dvl_msg_.velocity.y = report.vy;
-    dvl_msg_.velocity.z = report.vz;
-    dvl_msg_.beam_ranges_valid = true;
-    dvl_msg_.beam_velocities_valid = report.velocity_valid;
-    dvl_msg_.course_gnd = std::atan2(report.vy, report.vx);
-    dvl_msg_.speed_gnd = std::sqrt(report.vx * report.vx + report.vy * report.vy);
+    //dvl_msg_.header.stamp = rclcpp::Time(t.time_since_epoch().count());
+    //dvl_msg_.altitude = report.altitude;
+    //dvl_msg_.velocity.x = report.vx;
+    //dvl_msg_.velocity.y = report.vy;
+    //dvl_msg_.velocity.z = report.vz;
+    //dvl_msg_.beam_ranges_valid = true;
+    //dvl_msg_.beam_velocities_valid = report.velocity_valid;
+    //dvl_msg_.course_gnd = std::atan2(report.vy, report.vx);
+    //dvl_msg_.speed_gnd = std::sqrt(report.vx * report.vx + report.vy * report.vy);
 
-    for (std::size_t i = 0; i < 3; ++i) {
-      for (std::size_t j = 0; j < 3; ++j) {
-        dvl_msg_.velocity_covar[i * 3 + j] = report.covariance(i, j);
-      }
-    }
+    //for (std::size_t i = 0; i < 3; ++i) {
+    //  for (std::size_t j = 0; j < 3; ++j) {
+    //    dvl_msg_.velocity_covar[i * 3 + j] = report.covariance(i, j);
+    //  }
+    //}
 
-    dvl_msg_.num_good_beams = 0;
-    for (std::size_t i = 0; i < report.transducers.size(); ++i) {
-      dvl_msg_.beam_quality[i] = report.transducers[i].rssi;
-      dvl_msg_.beam_velocity[i] = report.transducers[i].velocity;
-      dvl_msg_.range[i] = report.transducers[i].distance;
-      dvl_msg_.num_good_beams += report.transducers[i].beam_valid ? 1 : 0;
-    }
+    //dvl_msg_.num_good_beams = 0;
+    //for (std::size_t i = 0; i < report.transducers.size(); ++i) {
+    //  dvl_msg_.beam_quality[i] = report.transducers[i].rssi;
+    //  dvl_msg_.beam_velocity[i] = report.transducers[i].velocity;
+    //  dvl_msg_.range[i] = report.transducers[i].distance;
+    //  dvl_msg_.num_good_beams += report.transducers[i].beam_valid ? 1 : 0;
+    //}
 
-    dvl_pub_->publish(dvl_msg_);
+    //dvl_pub_->publish(dvl_msg_);
   });
 
   // much of the following code could be moved into the above callback, but we separate it to improve readability
