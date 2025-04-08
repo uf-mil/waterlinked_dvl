@@ -46,6 +46,11 @@ def generate_launch_description():
         namespace=LaunchConfiguration("ns"),
         output="screen",
         parameters=[LaunchConfiguration("parameters_file")],
+        remappings=[
+            ('waterlinked_dvl_driver/odom', 'dvl/odom'),
+            # hide as unused topic
+            ('waterlinked_dvl_driver/dead_reckoning_report', 'dvl/_dead_reckoning_report'),
+        ],
     )
 
     configure_event = EmitEvent(
