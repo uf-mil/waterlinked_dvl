@@ -25,7 +25,7 @@ waterlinked_dvl_driver_node:
 
     # Rotate the DVL measurements about the z-axis. This is useful if the DVL
     # is mounted at an angle.
-    mounting_rotation_offset: 0 # degrees
+    mounting_rotation_offset: 45 # degrees
 
     # Turn on acoustic waves by default. This can be set to false to help keep
     # temperatures down.
